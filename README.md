@@ -25,8 +25,8 @@ The following fields are available in the app settings:
 
 | Field | Description |
 |-------|-------------|
-| **Server Address** | Your Jellyfin server URL (including protocol and port) |
-| **API Key** | Your personal Jellyfin API key |
+| **Server Address** | Your Jellyfin server URL (including protocol and port) | MANDATORY
+| **API Key** | Your personal Jellyfin API key | MANDATORY
 | **Latest Media Toggle** | Show the newest item from each selected library |
 | **Library Keywords** | Additional comma-separated keywords to include libraries (e.g. "kids, action") |
 | **Library Exclude Keywords** | Keywords to exclude libraries (e.g. "test, anime - filme") |
@@ -44,7 +44,7 @@ The following fields are available in the app settings:
 3. Active playback sessions
 4. Latest media (if enabled)
 5. User avatars (up to 14)
-6. Outro with server name
+6. Outro with server logo and name
 
 ## Image Fallback Strategy
 
@@ -59,6 +59,7 @@ For library item images:
 - GIF and Pixlet rendering are capped to 15 seconds of animation.
 - Maximum of **3 libraries** and **14 user avatars** displayed per run.
 - If there are more than 14 users, a random subset is shown.
+- User (Images) will only be shown, if the are PNG or JPEG on the server
 
 ## License
 
