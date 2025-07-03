@@ -25,8 +25,8 @@ The following fields are available in the app settings:
 
 | Field | Description |
 |-------|-------------|
-| **Server Address** | Your Jellyfin server URL (including protocol and port) | MANDATORY
-| **API Key** | Your personal Jellyfin API key | MANDATORY
+| **Server Address** (Required) | Your Jellyfin server URL (including protocol and port)  |
+| **API Key** (Required) | Your personal Jellyfin API key |
 | **Latest Media Toggle** | Show the newest item from each selected library |
 | **Library Keywords** | Additional comma-separated keywords to include libraries (e.g. "kids, action") |
 | **Library Exclude Keywords** | Keywords to exclude libraries (e.g. "test, anime - filme") |
