@@ -1,11 +1,11 @@
-# JellyfinStats for Tidbyt
+# JellyfinStats for Tidbyt / [Tronbyt Server](https://github.com/tavdog/tronbyt-server)
 
 This Pixlet applet displays Jellyfin statistics on a Tidbyt device. It provides a quick and visual overview of:
 
 - ▶️ Active playback sessions  
 - 🎞️ Media library statistics (e.g., number of movies and shows)  
 - 🆕 Latest media entries per library  
-- 🧑‍🤝‍🧑 User profile image grid  
+- 🧑‍🤝‍🧑 User profile image grid
 
 ## Preview
 
