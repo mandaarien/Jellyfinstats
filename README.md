@@ -7,6 +7,10 @@ This Pixlet applet displays Jellyfin statistics on a Tidbyt device. It provides 
 - Latest media entries per library
 - User profile image grid
 
+## Preview
+
+![JellyfinStats Preview](preview.gif)
+
 ## Features
 
 - ✅ Displays total number of movies and shows
