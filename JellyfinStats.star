@@ -71,7 +71,7 @@ def main(config):
     server_address = config.str("server_address_input", "------------> PUT SERVER URL HERE <------------")  
     api_key = config.str("server_api_key", "------------> PUT API KEY HERE <------------")  
     libraries_display = config.str("libraries_display", True)
-    max_libraries = config.get("max_libraries", 3)
+    max_libraries = config.get("max_libraries", 2) # 3 gets the .webp file right now just over 200 KB wich is to big :(
 
     if not server_address or not api_key:
         return render.Root(
