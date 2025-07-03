@@ -1,0 +1,7 @@
+---
+id: jellyfinstats
+name: JellyfinStats
+summary: displays Jellyfin statistics
+desc: This Pixlet applet displays Shows current Sessions and Library Infos on a Tidbyt device.
+author: mandaarien
+duration: 15s
