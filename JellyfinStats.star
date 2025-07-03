@@ -68,8 +68,8 @@ def get_schema():
 # =============
 def main(config):
     # Get configuration values
-    server_address = config.str("server_address_input", "https://jellyfin.mandaa.ipv64.net")  # ------> PUT SERVER URL HERE <------
-    api_key = config.str("server_api_key", "f61dc1aa0df04c4eb92c797006a5937b")  # ------> PUT API KEY HERE <------
+    server_address = config.str("server_address_input", "------------> PUT SERVER URL HERE <------------")  
+    api_key = config.str("server_api_key", "------------> PUT API KEY HERE <------------")  
     libraries_display = config.str("libraries_display", True)
     max_libraries = config.get("max_libraries", 3)
 
