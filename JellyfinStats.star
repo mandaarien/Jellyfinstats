@@ -46,7 +46,7 @@ def get_schema():
                 name = "Latest Media",
                 desc = "Show Latest Media per Library.",
                 icon = "display",
-                default = False,
+                default = True,
             ),
             schema.Text(
                 id = "library_keywords",
@@ -75,17 +75,17 @@ def main(config):
 
     if not server_address or not api_key:
         return render.Root(
-            render.Text("Bitte konfigurieren"),
+            render.Text("Please configure"),
         )
 
     # Only load data if configuration is complete
     sessions = get_sessions(server_address, api_key)
     if type(sessions) != "list":
-        return render.Root(child = render.Text("Fehler bei Sessions", font = "tom-thumb"))
+        return render.Root(child = render.Text("Session errors", font = "tom-thumb"))
 
     info = get_library_info(server_address, api_key)
     if type(info) != "dict":
-        return render.Root(child = render.Text("Fehler bei Library", font = "tom-thumb"))
+        return render.Root(child = render.Text("Library error", font = "tom-thumb"))
 
     users = get_users(server_address, api_key)
     libraries = get_libraries(server_address, api_key, config)
@@ -142,7 +142,7 @@ def main(config):
 
     # ▶ Part 1: Intro, Background, Sessions
     children.extend([
-        # Background Animation (NOT USED due to file size limitations!!)
+        # Background Animation (NOT USED due to output file size limitations!!)
         # Background gradient moves
         animation.Transformation(
             duration = 50,
@@ -419,7 +419,7 @@ def get_server_version(server_address, api_key):
 # ==========================
 def get_users(server_address, api_key):
     if not server_address or not api_key:
-        # Dummy-Daten: 4 Beispiel-User mit leeren Bildern
+        # Dummy data: 4 example users with empty images
         return [
             {"name": "User A", "image_data": None},
             {"name": "User B", "image_data": None},
@@ -555,7 +555,7 @@ def render_library_latest_tile(library, server_address, api_key):
 
     latest = get_latest_item_from_library(server_address, api_key, lib_id)
     if latest == None:
-        return render.Text(name + ": Kein neues Medium", font = "CG-pixel-3x5-mono")
+        return render.Text(name + ": No new Media", font = "CG-pixel-3x5-mono")
 
     title = latest.get("Name", "?")
     img = None
@@ -672,7 +672,7 @@ def render_user_grid(users):
             rows.append(render.Row(children = row_items))
 
     if len(rows) == 0:
-        return render.Text("No User Images")
+        return render.Text("No working User Images")
 
     return render.Column(children = rows)
 
@@ -688,7 +688,7 @@ def render_sessions(sessions):
         if item == None:
             continue  # Session is not active
 
-        title = item.get("Name", "Unbekanntes Medium")
+        title = item.get("Name", "Unknown medium")
         series = item.get("SeriesName", "")
 
         # Show series names before the title if necessary
