@@ -18,7 +18,7 @@ This Pixlet applet displays Jellyfin statistics on a Tidbyt device. It provides 
 - ✅ Displays total number of movies and shows
 - ✅ Animated transitions between sections
 - ✅ Latest media shown per allowed library
-- ✅ User avatars with profile images (up to 14)
+- ✅ User avatars with profile images (up to 8)
 - ✅ Configurable via Tidbyt app interface
 
 ## Configuration
@@ -38,11 +38,12 @@ The following fields are available in the app settings:
 - Libraries must match **allowed keywords** (predefined or user-defined).
 - Libraries are excluded if their names match any **blocked keywords**.
 - Only libraries with valid image assets are displayed.
+- Seed generated from timestamp of `last_activity` will be used for random subsets
 
 ## Display Order
 
 1. Server logo and name
-2. Library statistics (up to 3)
+2. Library statistics (up to 2)
 3. Active playback sessions
 4. Latest media (if enabled)
 5. User avatars (up to 8)
