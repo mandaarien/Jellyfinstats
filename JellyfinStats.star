@@ -10,6 +10,7 @@ load("http.star", "http")
 load("render.star", "render")
 load("schema.star", "schema")
 load("math.star", "math")
+load("random.star", "random")
 
 # ==========================
 # Image Assets
@@ -71,7 +72,7 @@ def main(config):
     server_address = config.str("server_address_input", "------------> PUT SERVER URL HERE <------------")  
     api_key = config.str("server_api_key", "------------> PUT API KEY HERE <------------")  
     libraries_display = config.str("libraries_display", True)
-    max_libraries = config.get("max_libraries", 2) # 3 gets the .webp file right now just over 200 KB wich is to big :(
+    max_libraries = config.get("max_libraries", 2) # 2 gets the .webp file right now just over 200 KB wich is to big :(
 
     if not server_address or not api_key:
         return render.Root(
@@ -89,7 +90,11 @@ def main(config):
 
     users = get_users(server_address, api_key)
     libraries = get_libraries(server_address, api_key, config)
-    libraries = libraries[:max_libraries]
+
+    # If more than max_libraries exist, randomly select max_libraries from the list
+    if len(libraries) > max_libraries:
+        libraries = random_sample(libraries, max_libraries)
+
     libraries_delay = 70
     libraries_screens = []
 
@@ -127,13 +132,13 @@ def main(config):
     background_animation_black_percentaces = []
 
     if libraries_display:
-        users_delay = libraries_delay
-        outro_delay = users_delay + 25
+        users_delay = libraries_delay 
+        outro_delay = users_delay + 35
         background_animation_black_duration = outro_delay + 25
         background_animation_black_percentaces = get_background_timings(background_animation_black_duration)
     else:
         users_delay = 125
-        outro_delay = 25
+        outro_delay = users_delay + 35
         background_animation_black_duration = 250
         background_animation_black_percentaces = get_background_timings(background_animation_black_duration)
 
@@ -639,7 +644,7 @@ def render_server_info(server_address, api_key):
         main_align = "start",
         children = [
             render.Marquee(
-                width = 36,
+                width = 38,
                 offset_start = 0,
                 offset_end = 0,
                 child = render.Text("" + str(get_server_name(server_address, api_key)), font = "Dina_r400-6"),
@@ -653,11 +658,13 @@ def render_server_info(server_address, api_key):
 # ======================================
 
 def render_user_grid(users):
-    max_users = 14
+    max_users = 8 # Maximum number of users to display
 
-    # If more than max_users exist, randomly select 14
+    # If more than max_users exist, randomly select max_users from the list
     if len(users) > max_users:
-        users = math.sample(users, max_users)
+        users = random_sample(users, max_users)
+        # random.shuffle(users)
+        # users = users[:max_users]
 
     rows = []
     for i in range(0, len(users), 4):  # 4 images per row
@@ -751,3 +758,28 @@ def get_background_timings(duration):
     p3 = 1.0 - (float(25) / float(duration))  # corresponds to 25ms as a proportion
     p4 = 1.0
     return [p1, p2, p3, p4]
+
+# ======================================
+# Calculate random sample from a list without duplicates
+# ======================================
+def random_sample(lst, n):
+    result = []
+    used_indices = []
+
+    total = len(lst)
+    seed = len(lst) * 7919  # Beliebiger Startwert
+
+    for i in range(total * 2):
+        if len(result) >= n:
+            break
+
+        # Pseudozufallszahl aus seed generieren
+        seed = (seed * 1664525 + 1013904223) % 4294967296
+        index = int(math.mod(seed, total))
+
+        # Doppelte vermeiden
+        if index not in used_indices:
+            used_indices.append(index)
+            result.append(lst[index])
+
+    return result
