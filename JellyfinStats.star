@@ -457,7 +457,7 @@ def get_users(server_address, api_key):
             "?tag=" + tag +
             "&api_key=" + api_key +
             "&format=jpeg" +
-            "&quality=90"
+            "&quality=60"
         )
 
         img_resp = http.get(image_url)
@@ -637,7 +637,7 @@ def get_primary_image_url(server, api_key, item):
     return (
         server + "/Items/" + item_id + "/Images/Primary" +
         "?tag=" + image_tag +
-        "&quality=80" +
+        "&quality=60" +
         "&api_key=" + api_key
     )
 
