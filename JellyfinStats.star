@@ -88,12 +88,15 @@ def main(config):
     if type(info) != "dict":
         return render.Root(child = render.Text("Library error", font = "tom-thumb"))
 
+    # Get users and libraries with the help of the random seed
     users = get_users(server_address, api_key)
+    seed = get_activity_seed(users)
+    users = random_sample(users, 8, seed)
     libraries = get_libraries(server_address, api_key, config)
 
     # If more than max_libraries exist, randomly select max_libraries from the list
     if len(libraries) > max_libraries:
-        libraries = random_sample(libraries, max_libraries)
+        libraries = random_sample(libraries, max_libraries, seed)
 
     libraries_delay = 70
     libraries_screens = []
@@ -423,14 +426,6 @@ def get_server_version(server_address, api_key):
 # API function: Grab Users (only those with JPEG or PNG profile images)
 # ==========================
 def get_users(server_address, api_key):
-    if not server_address or not api_key:
-        # Dummy data: 4 example users with empty images
-        return [
-            {"name": "User A", "image_data": None},
-            {"name": "User B", "image_data": None},
-            {"name": "User C", "image_data": None},
-            {"name": "User D", "image_data": None},
-        ]
     url = server_address + "/Users?api_key=" + api_key
     resp = http.get(url)
 
@@ -444,6 +439,7 @@ def get_users(server_address, api_key):
         uid = user.get("Id", "")
         tag = user.get("PrimaryImageTag", "")
         name = user.get("Name", "???")
+        activity = user.get("LastActivityDate", "")
 
         if uid == "" or tag == "":
             continue
@@ -473,6 +469,7 @@ def get_users(server_address, api_key):
             "name": name,
             "image_data": img_data,
             "image_url": image_url,
+            "last_activity": activity,
         })
 
     return result
@@ -760,26 +757,41 @@ def get_background_timings(duration):
     return [p1, p2, p3, p4]
 
 # ======================================
-# Calculate random sample from a list without duplicates
+# Calculate random number with the helpt of the last activity date of all users
 # ======================================
-def random_sample(lst, n):
+def get_activity_seed(users):
+    latest = ""
+    for user in users:
+        act = user.get("last_activity", "")
+        if act and act > latest:
+            latest = act
+
+    latest_str = str(latest)
+    digits = ""
+
+    for i in range(len(latest_str)):
+        c = latest_str[i]
+        if c >= "0" and c <= "9":
+            digits += c
+
+    if digits == "":
+        return 0
+
+    return int(digits[-6:]) # Use last 6 digits for seed
+
+# ======================================
+# Calculate sample from a list without duplicates
+# ======================================
+def random_sample(lst, n, seed):
     result = []
     used_indices = []
-
     total = len(lst)
-    seed = len(lst) * 7919  # Beliebiger Startwert
-
     for i in range(total * 2):
         if len(result) >= n:
             break
-
-        # Pseudozufallszahl aus seed generieren
         seed = (seed * 1664525 + 1013904223) % 4294967296
         index = int(math.mod(seed, total))
-
-        # Doppelte vermeiden
         if index not in used_indices:
             used_indices.append(index)
             result.append(lst[index])
-
     return result
