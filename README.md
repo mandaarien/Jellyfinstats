@@ -59,8 +59,8 @@ For library item images:
 ## Limits
 
 - GIF and Pixlet rendering are capped to 15 seconds of animation (and approx. 200KB ?).
-- Maximum of **3 libraries** and **8 user avatars** displayed per run.
-- If there are more than 3 libraries, a random subset is shown.
+- Maximum of **2 libraries** and **8 user avatars** displayed per run.
+- If there are more than 2 libraries, a random subset is shown.
 - If there are more than 8 users, a random subset is shown.
 - User (Images) will only be shown, if the are PNG or JPEG on the server
 
