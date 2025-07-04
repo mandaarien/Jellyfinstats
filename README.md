@@ -47,7 +47,7 @@ The following fields are available in the app settings:
 3. Active playback sessions
 4. Latest media (if enabled)
 5. User avatars (up to 8)
-6. Outro with server logo and name
+6. Outro with server logo and name -> disabled to safe some KB when Latest media is enabled!
 
 ## Image Fallback Strategy
 
@@ -59,7 +59,7 @@ For library item images:
 
 ## Limits
 
-- GIF and Pixlet rendering are capped to 15 seconds of animation (and approx. 200KB ?).
+- GIF and Pixlet rendering are capped to 15 seconds of animation (and approx. 190KB ?).
 - Maximum of **2 libraries** and **8 user avatars** displayed per run.
 - If there are more than 2 libraries, a random subset is shown.
 - If there are more than 8 users, a random subset is shown.
