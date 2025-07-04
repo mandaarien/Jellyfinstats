@@ -339,34 +339,37 @@ def main(config):
                 ),
             ],
         ),
-        # 2 Final logo animation as outro
-        animation.Transformation(
-            duration = 50,
-            delay = outro_delay,
-            direction = "normal",
-            fill_mode = "forwards",
-            child = render.Row(
-                main_align = "center",
-                cross_align = "center",
-                children = [
-                    render.Image(src = base64.decode(IMAGES["icon_color.png"]), width = 22, height = 20),
-                    render_server_info(server_address, api_key),
+        
+    ])
+    if not libraries_display: 
+        children.extend([
+            # 2 Final logo animation as outro
+            animation.Transformation(
+                duration = 25,
+                delay = outro_delay,
+                direction = "normal",
+                fill_mode = "forwards",
+                child = render.Row(
+                    main_align = "center",
+                    cross_align = "center",
+                    children = [
+                        render.Image(src = base64.decode(IMAGES["icon_color.png"]), width = 22, height = 20),
+                        # render_server_info(server_address, api_key), # Save some size by not showing server info again
+                    ],
+                ),
+                keyframes = [
+                    animation.Keyframe(
+                        percentage = 0.0,
+                        transforms = [animation.Translate(64, 6)],
+                        curve = "ease_in_out",
+                    ),
+                    animation.Keyframe(
+                        percentage = 1.0,
+                        transforms = [animation.Translate(2, 6)],
+                    ),
                 ],
             ),
-            keyframes = [
-                animation.Keyframe(
-                    percentage = 0.0,
-                    transforms = [animation.Translate(64, 6)],
-                    curve = "ease_in_out",
-                ),
-                animation.Keyframe(
-                    percentage = 1.0,
-                    transforms = [animation.Translate(2, 6)],
-                ),
-            ],
-        ),
-    ])
-
+         ])
     # Combine and render all elements
     return render.Root(
         render.Stack(
