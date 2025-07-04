@@ -73,6 +73,7 @@ def main(config):
     api_key = config.str("server_api_key", "------------> PUT API KEY HERE <------------")  
     libraries_display = config.str("libraries_display", True)
     max_libraries = config.get("max_libraries", 2) # 2 gets the .webp file right now just over 200 KB wich is to big :(
+    max_users = config.get("max_users", 8) # 8 gets the .webp file right now just over 200 KB wich is to big :(
 
     if not server_address or not api_key:
         return render.Root(
@@ -91,7 +92,7 @@ def main(config):
     # Get users and libraries with the help of the random seed
     users = get_users(server_address, api_key)
     seed = get_activity_seed(users)
-    users = random_sample(users, 8, seed)
+    users = random_sample(users, max_users , seed)
     libraries = get_libraries(server_address, api_key, config)
 
     # If more than max_libraries exist, randomly select max_libraries from the list
