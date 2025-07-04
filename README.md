@@ -38,6 +38,7 @@ The following fields are available in the app settings:
 - Libraries must match **allowed keywords** (predefined or user-defined).
 - Libraries are excluded if their names match any **blocked keywords**.
 - Only libraries with valid image assets are displayed.
+- Seed generated from timestamp of the latest user activities will be used for random subsets
 
 ## Display Order
 
