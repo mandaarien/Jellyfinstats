@@ -1,5 +1,7 @@
 # JellyfinStats for Tidbyt / [Tronbyt Server](https://github.com/tavdog/tronbyt-server)
 
+⚠️ I currently use the script via HomeAssistant with [TidbytAssistant](https://github.com/savdagod/TidbytAssistant) for automations. I have not yet released it in the Tidbyt Community.
+
 This Pixlet applet displays Jellyfin statistics on a Tidbyt device. It provides a quick and visual overview of:
 
 - ▶️ Active playback sessions  
@@ -40,10 +42,10 @@ The following fields are available in the app settings:
 ## Display Order
 
 1. Server logo and name
-2. Library statistics
+2. Library statistics (up to 3)
 3. Active playback sessions
 4. Latest media (if enabled)
-5. User avatars (up to 14)
+5. User avatars (up to 8)
 6. Outro with server logo and name
 
 ## Image Fallback Strategy
@@ -56,9 +58,10 @@ For library item images:
 
 ## Limits
 
-- GIF and Pixlet rendering are capped to 15 seconds of animation.
-- Maximum of **3 libraries** and **14 user avatars** displayed per run.
-- If there are more than 14 users, a random subset is shown.
+- GIF and Pixlet rendering are capped to 15 seconds of animation (and approx. 200KB ?).
+- Maximum of **3 libraries** and **8 user avatars** displayed per run.
+- If there are more than 3 libraries, a random subset is shown.
+- If there are more than 8 users, a random subset is shown.
 - User (Images) will only be shown, if the are PNG or JPEG on the server
 
 ## License
