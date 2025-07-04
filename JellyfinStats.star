@@ -99,13 +99,14 @@ def main(config):
     if len(libraries) > max_libraries:
         libraries = random_sample(libraries, max_libraries, seed)
 
-    libraries_delay = 70
+    part_1_delay = 13
+    libraries_delay = part_1_delay + 90
     libraries_screens = []
 
     if libraries_display:
         for lib in libraries:
             libraries_screens.append(animation.Transformation(
-                duration = 72,
+                duration = 85,
                 delay = libraries_delay,
                 direction = "normal",
                 fill_mode = "forwards",
@@ -130,7 +131,7 @@ def main(config):
                     ),
                 ],
             ))
-            libraries_delay += 50
+            libraries_delay += 65
 
     # Calculate delays and durations in later steps depending on libraries displayed
     background_animation_black_percentaces = []
@@ -171,35 +172,38 @@ def main(config):
             ],
         ),
         # Background fades to black
-        animation.Transformation(
-            duration = background_animation_black_duration,
-            delay = 10,
-            direction = "normal",
-            fill_mode = "forwards",
-            child = render.Image(src = base64.decode(IMAGES["background_black.png"])),
-            keyframes = [
-                animation.Keyframe(
-                    percentage = background_animation_black_percentaces[0],
-                    transforms = [animation.Translate(64, 0)],
-                    curve = "ease_in_out",
-                ),
-                animation.Keyframe(
-                    percentage = background_animation_black_percentaces[1],
-                    transforms = [animation.Translate(-160, 0)],
-                ),
-                animation.Keyframe(
-                    percentage = background_animation_black_percentaces[2],
-                    transforms = [animation.Translate(-160, 0)],
-                ),
-                animation.Keyframe(
-                    percentage = background_animation_black_percentaces[3],
-                    transforms = [animation.Translate(-256, 0)],
-                ),
-            ],
-        ),
+        # animation.Transformation(
+        #     duration = background_animation_black_duration,
+        #     delay = 10,
+        #     direction = "normal",
+        #     fill_mode = "forwards",
+        #     child = render.Image(src = base64.decode(IMAGES["background_black.png"])),
+        #     keyframes = [
+        #         animation.Keyframe(
+        #             percentage = background_animation_black_percentaces[0],
+        #             transforms = [animation.Translate(64, 0)],
+        #             curve = "ease_in_out",
+        #         ),
+        #         animation.Keyframe(
+        #             percentage = background_animation_black_percentaces[1],
+        #             transforms = [animation.Translate(-160, 0)],
+        #         ),
+        #         animation.Keyframe(
+        #             percentage = background_animation_black_percentaces[2],
+        #             transforms = [animation.Translate(-160, 0)],
+        #         ),
+        #         animation.Keyframe(
+        #             percentage = background_animation_black_percentaces[3],
+        #             transforms = [animation.Translate(-256, 0)],
+        #         ),
+        #     ],
+        # ),
+
+        # Part 1: Intro logo and stats
         # 1 Intro logo moves left off screen
         animation.Transformation(
             duration = 50,
+            delay = part_1_delay,
             direction = "normal",
             fill_mode = "forwards",
             child = render.Row(
@@ -224,8 +228,8 @@ def main(config):
         ),
         # 2 Stats slide in from right
         animation.Transformation(
-            duration = 80,
-            delay = 10,
+            duration = 90,
+            delay = part_1_delay + 10,
             direction = "normal",
             fill_mode = "forwards",
             child = render_library_info(info),
@@ -251,8 +255,8 @@ def main(config):
         ),
         # 2 Divider line appears from right
         animation.Transformation(
-            duration = 80,
-            delay = 10,
+            duration = 90,
+            delay = part_1_delay + 10,
             direction = "normal",
             fill_mode = "forwards",
             child = render.Box(
@@ -282,8 +286,8 @@ def main(config):
         ),
         # 2 Sessions slide in from right
         animation.Transformation(
-            duration = 80,
-            delay = 10,
+            duration = 90,
+            delay = part_1_delay + 10,
             direction = "normal",
             fill_mode = "forwards",
             child = render.Marquee(
@@ -322,7 +326,7 @@ def main(config):
     children.extend([
         # 1 User grid slides in from right
         animation.Transformation(
-            duration = 72,
+            duration = 73,
             delay = users_delay,
             direction = "normal",
             fill_mode = "forwards",
@@ -354,7 +358,7 @@ def main(config):
                     cross_align = "center",
                     children = [
                         render.Image(src = base64.decode(IMAGES["icon_color.png"]), width = 22, height = 20),
-                        # render_server_info(server_address, api_key), # Save some size by not showing server info again
+                        render_server_info(server_address, api_key), 
                     ],
                 ),
                 keyframes = [
@@ -369,7 +373,7 @@ def main(config):
                     ),
                 ],
             ),
-         ])
+            ])
     # Combine and render all elements
     return render.Root(
         render.Stack(
