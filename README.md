@@ -1,4 +1,4 @@
-# JellyfinStats for Tidbyt / [Tronbyt Server](https://github.com/tavdog/tronbyt-server)
+# JellyfinStats for Tidbyt / [Tronbyt Server](https://github.com/tronbyt/server)
 
 ⚠️ I currently use the script via HomeAssistant with [TidbytAssistant](https://github.com/savdagod/TidbytAssistant) for automations. I have not yet released it in the Tidbyt Community.
 
